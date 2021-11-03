@@ -38,6 +38,6 @@ class Shortcodes
 
     public function renderRow(ShortcodeDocumentation $doc)
     {
-        load_template(__DIR__ . '/../templates/shortcode-table-row.php', false, [$doc]);
+        load_template(__DIR__ . '/../../templates/shortcode-table-row.php', false, [$doc]);
     }
 }
