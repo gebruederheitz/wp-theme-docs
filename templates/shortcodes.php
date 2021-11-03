@@ -5,7 +5,7 @@
      */
     [$docs, $shortcodes] = $args;
 ?>
-<table class="wp-list-table widefat fixed striped table-view-list">
+<table class="wp-list-table widefat striped table-view-list">
     <thead>
     <tr>
         <th><?= __('Shortcode', 'ghwp') ?></th>
