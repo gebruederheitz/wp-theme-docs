@@ -11,7 +11,7 @@
         <th><?= __('Shortcode', 'ghwp') ?></th>
         <th colspan="2"><?= __('Parameter', 'ghwp') ?></th>
         <th><?= __('Beschreibung', 'ghwp') ?></th>
-        <th> __('Beispiele', 'ghwp') ?></th>
+        <th><?= __('Beispiele', 'ghwp') ?></th>
     </tr>
     </thead>
     <tbody>
