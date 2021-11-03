@@ -19,7 +19,7 @@ class Shortcodes
 
     protected $title = 'Verfügbare Shortcodes';
 
-    protected $partial = __DIR__ . '/../templates/shortcodes.php';
+    protected $partial = __DIR__ . '/../../templates/shortcodes.php';
 
     public function getDocumentedShortcodes(): array
     {

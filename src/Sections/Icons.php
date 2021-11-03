@@ -12,7 +12,7 @@ class Icons
 
     protected $title = 'Verfügbare Icon-Partials';
 
-    protected $partial = __DIR__ . '/../templates/icons.php';
+    protected $partial = __DIR__ . '/../../templates/icons.php';
 
     protected $iconsPath = '/template-parts/svg/';
 
