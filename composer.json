@@ -1,0 +1,22 @@
+{
+    "name": "gebruederheitz/wp-theme-docs",
+    "description": "Add a Wordpress theme documentation page to the editor.",
+    "type": "library",
+    "license": "GPL-3.0-only",
+    "autoload": {
+        "psr-4": {
+            "Gebruederheitz\\Wordpress\\Documentation\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andreas Maros",
+            "email": "andreas.maros@gebruederheitz.de"
+        }
+    ],
+    "require": {
+	    "php": "^7.3",
+        "gebruederheitz/simple-singleton": "^1.0",
+        "doctrine/annotations": "^1.13"
+    }
+}
