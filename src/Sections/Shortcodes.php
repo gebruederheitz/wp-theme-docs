@@ -6,9 +6,8 @@ use Gebruederheitz\Wordpress\Documentation\Annotations\ShortcodeDocumentation;
 use Gebruederheitz\Wordpress\Documentation\DocumentationSectionInterface;
 use Gebruederheitz\Wordpress\Documentation\Helper\AnnotationReader;
 
-class Shortcodes
-    extends AbstractDocumentationSection
-    implements DocumentationSectionInterface
+class Shortcodes extends AbstractDocumentationSection implements
+    DocumentationSectionInterface
 {
     /**
      * @hook ghwp_filter_documented_shortcodes: Classes with ShortcodeDocumentation annotations.
@@ -30,14 +29,17 @@ class Shortcodes
 
         sort($annotatedShortcodeClasses);
 
-        return array_map(
-            function($className) { return AnnotationReader::getDocumentation($className);},
-            $annotatedShortcodeClasses
-        );
+        return array_map(function ($className) {
+            return AnnotationReader::getDocumentation($className);
+        }, $annotatedShortcodeClasses);
     }
 
     public function renderRow(ShortcodeDocumentation $doc)
     {
-        load_template(__DIR__ . '/../../templates/shortcode-table-row.php', false, [$doc]);
+        load_template(
+            __DIR__ . '/../../templates/shortcode-table-row.php',
+            false,
+            [$doc],
+        );
     }
 }

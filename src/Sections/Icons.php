@@ -4,9 +4,8 @@ namespace Gebruederheitz\Wordpress\Documentation\Sections;
 
 use Gebruederheitz\Wordpress\Documentation\DocumentationSectionInterface;
 
-class Icons
-    extends AbstractDocumentationSection
-    implements DocumentationSectionInterface
+class Icons extends AbstractDocumentationSection implements
+    DocumentationSectionInterface
 {
     protected const OVERRIDE_PATH = 'template-parts/meta/docs/icons.php';
 
@@ -24,17 +23,14 @@ class Icons
     public function getIconList(): array
     {
         $iconDir = get_theme_file_path() . $this->iconsPath;
-        $icons = glob($iconDir.'{**/*.php,*.php}', GLOB_BRACE);
+        $icons = glob($iconDir . '{**/*.php,*.php}', GLOB_BRACE);
 
         $escapedIconDir = preg_quote($iconDir, '/');
         $pattern = '/' . $escapedIconDir . '(.*)\.php/';
 
-        return array_map(
-            function($fullFilePath) use ($pattern) {
-                return preg_filter($pattern, '$1', $fullFilePath);
-            },
-            $icons
-        );
+        return array_map(function ($fullFilePath) use ($pattern) {
+            return preg_filter($pattern, '$1', $fullFilePath);
+        }, $icons);
     }
 
     public function getIconPrettyName($iconSlug): string

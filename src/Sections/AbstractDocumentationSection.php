@@ -6,9 +6,8 @@ use Gebruederheitz\SimpleSingleton\Singleton;
 use Gebruederheitz\Wordpress\Documentation\DocumentationMenu;
 use Gebruederheitz\Wordpress\Documentation\DocumentationSectionInterface;
 
-abstract class AbstractDocumentationSection
-    extends Singleton
-    implements DocumentationSectionInterface
+abstract class AbstractDocumentationSection extends Singleton implements
+    DocumentationSectionInterface
 {
     protected const OVERRIDE_PATH = '';
 
@@ -22,7 +21,10 @@ abstract class AbstractDocumentationSection
     {
         parent::__construct();
         $this->overridePath = static::OVERRIDE_PATH;
-        add_filter(DocumentationMenu::HOOK_SECTIONS, [$this, 'onDocumentationSections']);
+        add_filter(DocumentationMenu::HOOK_SECTIONS, [
+            $this,
+            'onDocumentationSections',
+        ]);
     }
 
     public function getTitle(): string

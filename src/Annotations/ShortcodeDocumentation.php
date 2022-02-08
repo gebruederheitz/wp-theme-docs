@@ -57,8 +57,6 @@ class ShortcodeDocumentation
 
     public function hasParameters(): bool
     {
-        return (bool)count($this->parameters);
+        return (bool) count($this->parameters);
     }
-
-
 }

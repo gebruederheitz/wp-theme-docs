@@ -16,14 +16,17 @@ class DocumentationMenu
 
     protected const MENU_TITLE_NAMESPACE = 'ghwp';
 
-    protected const PAGE_TEMPLATE_PATH = __DIR__ . '/../templates/documentation-page.php';
+    protected const PAGE_TEMPLATE_PATH =
+        __DIR__ . '/../templates/documentation-page.php';
 
     protected $title = 'Hilfe zum /ghWP Theme';
 
     protected $overridePath = '';
 
-    public function __construct(?string $title = null, ?string $overridePath = null)
-    {
+    public function __construct(
+        ?string $title = null,
+        ?string $overridePath = null
+    ) {
         if (!empty($title)) {
             $this->title = $title;
         }
@@ -67,7 +70,7 @@ class DocumentationMenu
             __(static::MENU_TITLE, static::MENU_TITLE_NAMESPACE),
             'edit_posts',
             static::MENU_SLUG,
-            [$this, 'renderSubmenu']
+            [$this, 'renderSubmenu'],
         );
     }
 }

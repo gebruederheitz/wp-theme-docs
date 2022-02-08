@@ -8,7 +8,6 @@ use ReflectionClass;
 
 class AnnotationReader
 {
-
     private $reader;
 
     private $reflectionClass;
@@ -23,14 +22,18 @@ class AnnotationReader
     {
         return $this->reader->getClassAnnotation(
             $this->reflectionClass,
-            ShortcodeDocumentation::class
+            ShortcodeDocumentation::class,
         );
     }
 
-    public static function getDocumentation(string $className): ShortcodeDocumentation
-    {
+    public static function getDocumentation(
+        string $className
+    ): ShortcodeDocumentation {
         $reflectionClass = new ReflectionClass($className);
         $reader = new DoctrineAnnotationReader();
-        return $reader->getClassAnnotation($reflectionClass, ShortcodeDocumentation::class);
+        return $reader->getClassAnnotation(
+            $reflectionClass,
+            ShortcodeDocumentation::class,
+        );
     }
 }
