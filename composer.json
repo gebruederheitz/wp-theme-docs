@@ -1,11 +1,11 @@
 {
     "name": "gebruederheitz/wp-theme-docs",
-    "description": "Add a Wordpress theme documentation page to the editor.",
+    "description": "Add simply admin pages or a Wordpress theme documentation page to the editor.",
     "type": "library",
     "license": "GPL-3.0-only",
     "autoload": {
         "psr-4": {
-            "Gebruederheitz\\Wordpress\\Documentation\\": "src/"
+            "Gebruederheitz\\Wordpress\\AdminPage\\": "src/"
         }
     },
     "authors": [

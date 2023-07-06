@@ -1,8 +1,10 @@
 <?php
 
-namespace Gebruederheitz\Wordpress\Documentation\Traits;
+namespace Gebruederheitz\Wordpress\AdminPage\Documentation\Traits;
 
-use Gebruederheitz\Wordpress\Documentation\Sections\Shortcodes;
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Section\Shortcodes;
+
+use function add_filter;
 
 trait withShortcodeDocumentation
 {

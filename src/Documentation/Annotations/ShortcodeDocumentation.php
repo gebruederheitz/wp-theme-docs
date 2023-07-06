@@ -1,6 +1,6 @@
 <?php
 
-namespace Gebruederheitz\Wordpress\Documentation\Annotations;
+namespace Gebruederheitz\Wordpress\AdminPage\Documentation\Annotations;
 
 /**
  * Class ShortcodeDocumentation

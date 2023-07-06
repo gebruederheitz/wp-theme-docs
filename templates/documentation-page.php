@@ -1,6 +1,6 @@
 <?php
     // GHWP "Help Center" – Basic In-Site Documentation
-    /** @var Gebruederheitz\Wordpress\Documentation\DocumentationMenu $docs */
+    /** @var Gebruederheitz\Wordpress\Documentation\AdminPage $docs */
     [$docs] = $args;
 ?>
 <style>

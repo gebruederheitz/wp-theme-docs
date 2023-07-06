@@ -1,9 +1,9 @@
 <?php
 
-namespace Gebruederheitz\Wordpress\Documentation\Helper;
+namespace Gebruederheitz\Wordpress\AdminPage\Helper;
 
 use Doctrine\Common\Annotations\AnnotationReader as DoctrineAnnotationReader;
-use Gebruederheitz\Wordpress\Documentation\Annotations\ShortcodeDocumentation;
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Annotations\ShortcodeDocumentation;
 use ReflectionClass;
 
 class AnnotationReader
