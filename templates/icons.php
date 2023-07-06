@@ -1,9 +1,9 @@
 <?php
     /**
-     * @var \Gebruederheitz\Wordpress\Documentation\DocumentationMenu $docs
-     * @var \Gebruederheitz\Wordpress\Documentation\Sections\Icons $icons
+     * @var \Gebruederheitz\Wordpress\AdminPage\AdminPage $page
+     * @var \Gebruederheitz\Wordpress\AdminPage\Documentation\Section\Icons $icons
      */
-    [$docs, $icons] = $args;
+    [$page, $icons] = $args;
 ?>
 <style>
     .wp-core-ui button.button {
@@ -20,8 +20,8 @@
 <table class="wp-list-table widefat fixed striped table-view-list">
     <thead>
     <tr>
-        <th><?= __('Partial-Name', 'ghwp') ?></th>
-        <th><?= __('Vorschau', 'ghwp') ?></th>
+        <th><?= __('Partial-Name', $page->getI18nNamespace()) ?></th>
+        <th><?= __('Preview', $page->getI18nNamespace()) ?></th>
     </tr>
     </thead>
     <tbody>

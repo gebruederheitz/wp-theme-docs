@@ -1,5 +1,5 @@
 <?php
-    /** @var Gebruederheitz\Wordpress\Documentation\Annotations\ShortcodeDocumentation $doc */
+    /** @var Gebruederheitz\Wordpress\AdminPage\Documentation\Annotations\ShortcodeDocumentation $doc */
     [$doc] = $args;
 
     $parameters = $doc->getParameters();

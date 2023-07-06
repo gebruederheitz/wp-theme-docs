@@ -1,17 +1,17 @@
 <?php
     /**
-     * @var \Gebruederheitz\Wordpress\Documentation\DocumentationMenu $docs
-     * @var \Gebruederheitz\Wordpress\Documentation\Sections\Shortcodes $shortcodes
+     * @var \Gebruederheitz\Wordpress\AdminPage\AdminPage $page
+     * @var \Gebruederheitz\Wordpress\AdminPage\Documentation\Section\Shortcodes $shortcodes
      */
-    [$docs, $shortcodes] = $args;
+    [$page, $shortcodes] = $args;
 ?>
 <table class="wp-list-table widefat striped table-view-list">
     <thead>
     <tr>
-        <th><?= __('Shortcode', 'ghwp') ?></th>
-        <th colspan="2"><?= __('Parameter', 'ghwp') ?></th>
-        <th><?= __('Beschreibung', 'ghwp') ?></th>
-        <th><?= __('Beispiele', 'ghwp') ?></th>
+        <th><?= __('Shortcode', $page->getI18nNamespace()) ?></th>
+        <th colspan="2"><?= __('Parameter', $page->getI18nNamespace()) ?></th>
+        <th><?= __('Beschreibung', $page->getI18nNamespace()) ?></th>
+        <th><?= __('Beispiele', $page->getI18nNamespace()) ?></th>
     </tr>
     </thead>
     <tbody>

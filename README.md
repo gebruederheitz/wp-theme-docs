@@ -20,6 +20,8 @@ Make sure you have Composer autoload or an alternative class loader present.
 use Gebruederheitz\Wordpress\Documentation\AdminPage;
 
 new AdminPage('my-extra-admin-page', 'Extra Tools', 'tools.php');
+// or use the factory method
+AdminPage::factory('my-extra-admin-page', 'Extra Tools', 'tools.php');
 ```
 
 This will set up a basic admin page under the "Tools" tab in
@@ -29,7 +31,27 @@ the Wordpress backend with the translated title `__('Extra Tools', 'ghwp')`
 In its most basic state, this renders a page empty except for the title. You
 will need to [register sections](#adding-sections) to add some content.
 
+### Constructor (and factory) arguments
 
+```php
+AdminPage::__construct(
+     string $menuSlug,
+     ?string $title = null,
+     ?string $menuLocation = 'themes.php',
+     ?string $menuTitle = null,
+     ?string $overridePath = null,
+     ?string $i18nNamespace = 'ghwp'
+ ): AdminPage
+```
+
+| argument | description |
+| --- | --- |
+| menuSlug | Where the menu will be available under $menuLocation (`?page={{this}}`) |
+| title | A title displayed as `<h1>` at the top of the page, will be run through `__()`. |
+| menuLocation | Where to append the new submenu. Popular places are `themes.php` or `tools.php`. |
+| menuTitle | An alternative text for the menu entry. Defaults to `$title`. |
+| overridePath | An alternative path where consumers can put overrides templates to use instead of `template-parts/meta/docs/documentation-page.php`. |
+| i18nNamespace | The namespace used for translations for menu titles, titles and within the default templates (`__(somestring, 'ghwp')`) |
 
 ### Adding sections
 
@@ -181,6 +203,7 @@ new DocumentationMenu([$sectionOne, $sectionTwo]);
 ```
 
 > **Warning**
+> 
 > Due to how PHP inheritance works, AdminPage's static `::factory()` method is
 > available on DocumentationMenu, but it should not be used, as it will return
 > a simple AdminPage object, not a DocumentationMenu instance.

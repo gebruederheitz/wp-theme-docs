@@ -39,7 +39,7 @@ class AdminPage
     ): AdminPage {
         return new AdminPage(
             $menuSlug,
-            ($title = null),
+            $title,
             $menuLocation,
             $menuTitle,
             $overridePath,
@@ -95,6 +95,11 @@ class AdminPage
         }
 
         return $this;
+    }
+
+    public function getI18nNamespace(): string
+    {
+        return $this->i18nNamespace;
     }
 
     public function getSections(): array

@@ -1,7 +1,7 @@
 <?php
     // GHWP "Help Center" – Basic In-Site Documentation
-    /** @var Gebruederheitz\Wordpress\Documentation\AdminPage $docs */
-    [$docs] = $args;
+    /** @var Gebruederheitz\Wordpress\AdminPage\AdminPage $page */
+    [$page] = $args;
 ?>
 <style>
 
@@ -44,21 +44,21 @@
         scroll-margin-block-start: 5rem;
     }
 </style>
-<h1 class="ghwp-docs-title"><?= $docs->getTitle() ?></h1>
+<h1 class="ghwp-docs-title"><?= $page->getTitle() ?></h1>
 
 <ul id="top">
-<?php foreach ($docs->getSections() as $i => $section): ?>
+<?php foreach ($page->getSections() as $i => $section): ?>
     <li>
         <a href="#section-<?= $i ?>"><?= $section->getTitle() ?></a>
     </li>
 <?php endforeach; ?>
 </ul>
 
-<?php foreach ($docs->getSections() as $i => $section): ?>
+<?php foreach ($page->getSections() as $i => $section): ?>
     <div class="ghwp-docs-section">
         <h2 id="section-<?= $i ?>" class="ghwp-docs-section"><?= $section->getTitle() ?? '' ?></h2>
         <a href="#top" class="back-to-top">^ back to top</a>
-        <?php $section->render($docs) ?>
+        <?php $section->render($page) ?>
     </div>
 <?php endforeach; ?>
 
