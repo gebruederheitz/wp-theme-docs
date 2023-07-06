@@ -34,7 +34,7 @@ class Shortcodes extends AbstractAdminPageSection implements
 
     protected function getDefaultPartial(): string
     {
-        return __DIR__ . '/../../templates/shortcodes.php';
+        return __DIR__ . '/../../../templates/shortcodes.php';
     }
 
     protected function getOverridePath(): string
@@ -59,7 +59,7 @@ class Shortcodes extends AbstractAdminPageSection implements
     public function renderRow(ShortcodeDocumentation $doc)
     {
         load_template(
-            __DIR__ . '/../../templates/shortcode-table-row.php',
+            __DIR__ . '/../../../templates/shortcode-table-row.php',
             false,
             [$doc],
         );

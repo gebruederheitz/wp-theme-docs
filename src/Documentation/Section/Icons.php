@@ -28,7 +28,7 @@ class Icons extends AbstractAdminPageSection implements
 
     protected function getDefaultPartial(): string
     {
-        return __DIR__ . '/../../templates/icons.php';
+        return __DIR__ . '/../../../templates/icons.php';
     }
 
     protected function getOverridePath(): string

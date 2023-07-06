@@ -14,9 +14,6 @@ class DocumentationMenu extends AdminPage
 
     protected const MENU_TITLE_NAMESPACE = 'ghwp';
 
-    protected const PAGE_TEMPLATE_PATH =
-        __DIR__ . '/../templates/documentation-page.php';
-
     public function __construct(
         ?array $sections = [],
         ?string $title = null,
