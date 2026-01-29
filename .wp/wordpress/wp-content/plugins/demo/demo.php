@@ -46,6 +46,20 @@ class MyShortcode
 }
 
 #[
+    ShortcodeDocumentation(
+        shortcode: 'my-other-shortcode',
+        description: 'A dummy class representing a shortcode with documentation.',
+    )
+]
+class MyOtherShortcode
+{
+    public function __construct()
+    {
+        ShortcodeDocumentation::register($this);
+    }
+}
+
+#[
     DocumentationSection(
         title: 'My Documented Module',
         description: <<< 'EOF'
@@ -89,5 +103,6 @@ class OtherDocumentedModule
 }
 
 new MyShortcode();
+new MyOtherShortcode();
 new MyDocumentedModule();
 OtherDocumentedModule::init();

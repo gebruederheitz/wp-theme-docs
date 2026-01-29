@@ -15,8 +15,8 @@ class ShortcodeDocumentation
     public function __construct(
         public string $shortcode,
         public string $description,
-        public array $parameters,
-        public array $examples
+        public array $parameters = [],
+        public array $examples = []
     ) {
     }
 
