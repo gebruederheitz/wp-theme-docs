@@ -82,12 +82,12 @@ class MyDocumentedModule
 ]
 class OtherDocumentedModule
 {
-    public function __construct()
+    public static function init(): void
     {
-        DocumentationSection::register($this);
+        DocumentationSection::register(self::class);
     }
 }
 
 new MyShortcode();
 new MyDocumentedModule();
-new OtherDocumentedModule();
+OtherDocumentedModule::init();

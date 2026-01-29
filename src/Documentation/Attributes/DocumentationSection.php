@@ -16,11 +16,20 @@ class DocumentationSection
     ) {
     }
 
-    public static function register(object $instance): void
+    /**
+     * @param object|class-string $identifier
+     */
+    public static function register(object|string $identifier): void
     {
+        if (is_object($identifier)) {
+            $class = get_class($identifier);
+        } else {
+            $class = $identifier;
+        }
+
         add_filter(
             AdminPage::HOOK_DOC_SECTIONS,
-            fn($classes) => [...$classes, get_class($instance)],
+            fn($classes) => [...$classes, $class],
         );
     }
 }
