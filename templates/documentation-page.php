@@ -1,6 +1,6 @@
 <?php
 // GHWP "Help Center" – Basic In-Site Documentation
-/** @var Gebruederheitz\Wordpress\AdminPage\AdminPage $page */
+/** @var array{0: Gebruederheitz\Wordpress\AdminPage\AdminPage} $args */
 [$page] = $args; ?>
 <style>
 
@@ -16,6 +16,8 @@
 
     .ghwp-docs-section {
         position: relative;
+        padding: 0 1vw;
+        overflow-x: auto;
     }
 
     h2.ghwp-docs-section,
