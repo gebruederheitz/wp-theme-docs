@@ -2,3 +2,5 @@
 .idea/
 util/node_modules/
 .task
+.env
+.wp/wordpress
