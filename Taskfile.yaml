@@ -1,0 +1,60 @@
+version: 3
+tasks:
+  default:
+    cmd: task -l
+
+  lint:
+    desc: Run basic linting with prettier & phpstan
+    deps: [install]
+    cmds:
+      - task: lint:js
+      - composer lint
+
+  lint:js:
+    dir: util
+    internal: true
+    cmd: npm run lint
+
+  prettier:
+    desc: Make prettier process and fix all files in src/
+    dir: util
+    deps: [install]
+    cmd: npx prettier -w --config .prettierrc ../src
+
+  release:
+    desc: Create a tagged release to publish a new version of the package
+    deps: [lint]
+    dir: util
+    cmd: npm run release
+
+  install-dependencies:
+    aliases: [install]
+    run: when_changed
+    desc: Install all project dependencies
+    deps:
+      - install:node
+      - install:php
+
+  install:node:
+    desc: Install Node.js dependencies
+    dir: util
+    sources:
+      - package.json
+      - package-lock.json
+      - .tool-versions
+    generates:
+      - node_modules/**/*
+    cmds:
+      - npm install
+
+  install:php:
+    desc: Install PHP dependencies
+    sources:
+      - composer.json
+      - composer.lock
+      - .tool-versions
+    generates:
+      - composer.lock
+      - vendor/**/*
+    cmds:
+      - composer install
