@@ -1,23 +1,11 @@
 <?php
 /**
+ * @var array{0: \Gebruederheitz\Wordpress\AdminPage\AdminPage, 1: \Gebruederheitz\Wordpress\AdminPage\Documentation\Section\Generic} $args
  * @var \Gebruederheitz\Wordpress\AdminPage\AdminPage $page
- * @var \Gebruederheitz\Wordpress\AdminPage\Documentation\Section\Generic $sections
+ * @var \Gebruederheitz\Wordpress\AdminPage\Documentation\Section\Generic $genericSection
  */
-[$page, $sections] = $args;
-
-function renderAnchor($section): string
-{
-    if (!empty($section->anchor)) {
-        return ' id="' . esc_attr($section->anchor) . '"';
-    }
-    return '';
-}
-?>
-<div class="test">
-    <?php foreach ($sections->getSections() as $section): ?>
-        <h2<?= renderAnchor($section) ?>><?= esc_html($section->title) ?></h2>
-        <div class="section-content">
-            <?= $sections->parseMarkdown($section) ?>
-        </div>
-    <?php endforeach; ?>
+[$page, $genericSection] = $args; ?>
+<?= $genericSection->renderAnchor() ?>
+<div class="section-content">
+    <?= $genericSection->renderContent() ?>
 </div>

@@ -2,8 +2,18 @@
 
 namespace Gebruederheitz\Wordpress\AdminPage;
 
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\DocumentationSection;
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Section\Generic;
+use Gebruederheitz\Wordpress\AdminPage\Helper\AttributeReader;
+use ReflectionException;
+
 class AdminPage
 {
+    /**
+     * @hook ghwp_filter_documentation_sections: Classes with DocumentationSection attributes.
+     */
+    public const HOOK_DOC_SECTIONS = 'ghwp_filter_documentation_sections';
+
     protected const HOOK_SECTIONS_PREFIX = 'ghwp_filter_sections_';
 
     protected const DEFAULT_OVERRIDE_PATH = 'template-parts/meta/docs/documentation-page.php';
@@ -126,6 +136,36 @@ class AdminPage
         }
 
         load_template($templatePathUsed, false, [$this]);
+    }
+
+    public function processGenericSections(): self
+    {
+        $sectionAttributes = $this->getGenericSections();
+        $sections = array_map(function (
+            DocumentationSection $sectionAttribute
+        ) {
+            return new Generic($sectionAttribute);
+        },
+        $sectionAttributes);
+
+        $this->addSections($sections);
+
+        return $this;
+    }
+
+    /**
+     * @return array<DocumentationSection>
+     * @throws ReflectionException
+     */
+    private function getGenericSections(): array
+    {
+        $annotatedClasses = apply_filters(self::HOOK_DOC_SECTIONS, []);
+
+        sort($annotatedClasses);
+
+        return array_map(function ($className) {
+            return AttributeReader::getDocumentationSection($className);
+        }, $annotatedClasses);
     }
 
     protected function registerSubmenu()

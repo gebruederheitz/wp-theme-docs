@@ -10,15 +10,9 @@ trait WithShortcodeDocumentation
 {
     public static function addDocumentation(): void
     {
-        add_filter(Shortcodes::HOOK_SHORTCODE_DOCS, [
-            static::class,
-            'onShortcodeDocs',
-        ]);
-    }
-
-    public static function onShortcodeDocs(array $documentedClasses): array
-    {
-        $documentedClasses[] = static::class;
-        return $documentedClasses;
+        add_filter(
+            Shortcodes::HOOK_SHORTCODE_DOCS,
+            fn($classes) => [...$classes, static::class],
+        );
     }
 }

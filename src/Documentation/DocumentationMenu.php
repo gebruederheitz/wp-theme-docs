@@ -17,7 +17,8 @@ class DocumentationMenu extends AdminPage
     public function __construct(
         ?array $sections = [],
         ?string $title = null,
-        ?string $overridePath = null
+        ?string $overridePath = null,
+        ?bool $processGenericSections = false
     ) {
         parent::__construct(
             static::MENU_SLUG,
@@ -32,6 +33,10 @@ class DocumentationMenu extends AdminPage
 
         if (!empty($sections)) {
             $this->addSections($sections);
+        }
+
+        if ($processGenericSections) {
+            $this->processGenericSections();
         }
     }
 }

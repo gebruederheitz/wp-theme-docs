@@ -3,6 +3,7 @@
 namespace Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes;
 
 use Attribute;
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Section\Shortcodes;
 
 #[Attribute(Attribute::TARGET_CLASS)]
 class ShortcodeDocumentation
@@ -17,6 +18,14 @@ class ShortcodeDocumentation
         public array $parameters,
         public array $examples
     ) {
+    }
+
+    public static function register(object $instance): void
+    {
+        add_filter(
+            Shortcodes::HOOK_SHORTCODE_DOCS,
+            fn($classes) => [...$classes, get_class($instance)],
+        );
     }
 
     public function hasParameters(): bool

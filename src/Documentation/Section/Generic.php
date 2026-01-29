@@ -5,52 +5,43 @@ namespace Gebruederheitz\Wordpress\AdminPage\Documentation\Section;
 use Gebruederheitz\Wordpress\AdminPage\AbstractAdminPageSection;
 use Gebruederheitz\Wordpress\AdminPage\AdminPageSectionInterface;
 use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\DocumentationSection;
-use Gebruederheitz\Wordpress\AdminPage\Helper\AttributeReader;
 
 class Generic extends AbstractAdminPageSection implements
     AdminPageSectionInterface
 {
-    /**
-     * @hook ghwp_filter_documentation_sections: Classes with DocumentationSection attributes.
-     */
-    public const HOOK_DOC_SECTIONS = 'ghwp_filter_documentation_sections';
-
-    public function __construct()
+    public function __construct(private DocumentationSection $docs)
     {
-    }
-
-    /**
-     * @return array<DocumentationSection>
-     */
-    public function getSections(): array
-    {
-        $annotatedClasses = apply_filters(self::HOOK_DOC_SECTIONS, []);
-
-        sort($annotatedClasses);
-
-        return array_map(function ($className) {
-            return AttributeReader::getDocumentationSection($className);
-        }, $annotatedClasses);
     }
 
     public function getTitle(): string
     {
-        return 'Modules';
+        return $this->docs->title;
     }
 
-    public function parseMarkdown(DocumentationSection $section): string
+    public function renderContent(): string
     {
-        if (empty($section->description)) {
+        if (empty($this->docs->description)) {
             return '';
         }
 
-        if ($section->markdown && class_exists('\FastVolt\Helper\Markdown')) {
+        if (
+            $this->docs->markdown &&
+            class_exists('\FastVolt\Helper\Markdown')
+        ) {
             return \FastVolt\Helper\Markdown::new(sanitize: true)
-                ->setContent($section->description)
+                ->setContent($this->docs->description)
                 ->getHtml();
         }
 
-        return $section->description;
+        return $this->docs->description;
+    }
+
+    public function renderAnchor(): string
+    {
+        if (!empty($this->docs->anchor)) {
+            return '<a href="#" id="' . $this->docs->anchor . '"></a>';
+        }
+        return '';
     }
 
     protected function getDefaultPartial(): string
