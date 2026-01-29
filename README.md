@@ -425,13 +425,59 @@ Same as [with the Shortcodes section](#using-a-different-template-partial-locati
 
 ### Dependencies
 
-- PHP >= 7.4
+- PHP >= 8.0
+- optional: DDEV
 - [Composer 2.x](https://getcomposer.org)
-- [NVM](https://github.com/nvm-sh/nvm) and nodeJS LTS (v16.x)
-- Nice to have: GNU Make (or drop-in alternative)
+- [asdf tool version manager](https://asdf-vm.com) with nodeJS LTS (v24.x)
+- [go-task / Taskfiles](https://taskfile.dev)
 
 
 ## Migration
+
+### v2 to v3
+
+We've removed the deprecated Doctrine\Annotations and replaced them with native
+PHP attributes. If you were using the ShortcodeDocumentation annotation, you'll
+need to change your code to use the attribute instead:
+
+```php
+- use Gebruederheitz\Wordpress\AdminPage\Documentation\Annotations\ShortcodeDocumentation;
++ use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\ShortcodeDocumentation;
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Traits\withShortcodeDocumentation;
+
+- /**
+-  * @ShortcodeDocumentation(
+-  *   shortcode="ghwp-my-shortcode", 
+-  *   description="Renders a thing.",
+-  *   parameters={
+-  *       "id": "The post ID you wish to display."
+-  *   },
+-  *   examples={
+-  *     "[ghwp-my-shortcode id=123 /]"
+-  *   }
+-  * )
+-  */
++ #[ShortcodeDocumentation(
++   shortcode: "ghwp-my-shortcode",
++   description: "Renders a thing.",
++   parameters: [
++       "id" => "The post ID you wish to display."
++   ],
++   examples: [
++       "[ghwp-my-shortcode id=123 /]"
++   ]
++ )]
++
+class MyShortcode {
+    use withShortcodeDocumentation;
+    
+    public function __construct() 
+    {
+        $this->addDocumentation();
+        add_shortcode('ghwp-my-shortcode', [$this, 'renderShortcode'));
+    }
+
+```
 
 ### v1 to v2
 
