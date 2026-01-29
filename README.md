@@ -261,12 +261,79 @@ add_filter($docs->getSectionsHook(), function(array $sections): array {
 This will register the sections and add them to the help page.
 
 
+#### Generic Documentation Sections
+
+This module will create a documentation section for users based
+on the attribute class `DocumentationSection`.
+
+```php
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\DocumentationSection;
+
+#[DocumentationSection(
+    title: "My Feature",
+    description: "<p>This is some <strong>content</strong> for my feature documentation.</p>"
+)]
+class MyDocumentedFeature {
+    public function __construct() 
+    {
+        DocumentationSection::register($this);
+        // or: DocumentationSection::register(self::class);
+    }
+}
+```
+
+You will need to initialize the processing of these generic section in your
+AdminPage or DocumentationMenu instance you want them rendered in:
+
+```php
+// Using a regular AdminPage
+\Gebruederheitz\Wordpress\AdminPage\AdminPage::factory('docs')
+->processGenericSections();
+
+// Using the DocumentationMenu constructor
+new \Gebruederheitz\Wordpress\AdminPage\Documentation\DocumentationMenu(
+    sections: [/* ... */],
+    processGenericSections: true // <-- enable processing
+)
+// or using the method
+$docs = new \Gebruederheitz\Wordpress\AdminPage\Documentation\DocumentationMenu(/* ... */);
+$docs->processGenericSections();
+```
+
+The generic sections can render Markdown content if the third-party package
+`fastvolt/markdown` is installed and the `markdown` property is set to `true`:
+
+```php
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\DocumentationSection;
+#[DocumentationSection(
+    title: "My Markdown Feature",
+    description: <<< 'EOL'
+        ### Markdown is awesome
+        
+        This is some **Markdown** content for my feature documentation.
+        
+        - It supports lists
+        - And other _cool_ stuff
+        
+        ```
+        // Like code blocks
+        echo "Hello, World!";
+        ```
+    EOL,
+    markdown: true
+)]
+class MyDocumentedFeature {
+    public function __construct() 
+    {
+        DocumentationSection::register($this);
+    }
+}
+```
 
 #### Shortcode Documentation Annotations
 
 This module will automatically create a shortcode documentation for users based
-on the annotation class `ShortcodeDocumentation`. It is based on Doctrine's
-annotation reader.
+on the attribute class `ShortcodeDocumentation`.
 
 ##### Documenting shortcodes
 
@@ -274,52 +341,45 @@ This assumes you add your shortcodes via individual classes for each shortcode
 and have both the `DocumentationMenu` page class and the `Shortcodes` section
 class up and running.
 
-###### Available annotation properties:
+###### Available attribute properties:
 
 | Property | Type |  Description |
 | --- | --- | --- |
 | `shortcode` | string | The actual shortcode that you use for registration. |
 | `description` | string | A short description of what your shortcode is good for. |
-| `parameters` | map | A map of parameter names and their descriptions, so users will know which parameters to pass and when. |
-| `examples` | string list | A list of strings that will be wrapped in `<pre><code></code></pre>`, providing your users some examples of the shortcode's usage. |
+| `parameters` | array<string, string> | A map of parameter names and their descriptions, so users will know which parameters to pass and when. |
+| `examples` | array<string> | A list of strings that will be wrapped in `<pre><code></code></pre>`, providing your users some examples of the shortcode's usage. |
 
 
-The simplest way to document your Shortcode is to use the trait provided:
+The simplest way to document your Shortcode:
 
 ```php
-use Gebruederheitz\Wordpress\AdminPage\Documentation\Traits\withShortcodeDocumentation;
-use Gebruederheitz\Wordpress\AdminPage\Documentation\Annotations\ShortcodeDocumentation;
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\ShortcodeDocumentation;
 
-/**
- * Class MyShortcode
- *
- * @package Ghwp\Shortcode
- *
- * @ShortcodeDocumentation(
- *     shortcode="ghwp-my-shortcode",
- *     description="Renders a thing.",
- *     parameters={
- *       "id": "The post ID you wish to display."
- *     },
- *     examples={
- *       "[ghwp-my-shortcode id=123 /]"
- *     }
- *  )
- */
+#[ShortcodeDocumentation(
+    shortcode: "ghwp-my-shortcode",
+    description: "Renders a thing.",
+    parameters: [
+        "id" => "The post ID you wish to display.",
+    ],
+    examples: [
+        "[ghwp-my-shortcode id=123 /]"
+    ]
+)]
 class MyShortcode {
-    use withShortcodeDocumentation;
     
     /* With a dynamic class instance... */
     public function __construct() 
     {
-        self::addDocumentation();
+        ShortcodeDocumentation::register($this);
+        // or: ShortcodeDocumentation::register(self::class);
         add_shortcode('ghwp-my-shortcode', [$this, 'renderShortcode'));
     }
     
     /* ...or with a static class / method */
     public static function init() 
     {
-        self::addDocumentation();
+        ShortcodeDocumentation::register(self::class);
         add_shortcode('ghwp-my-shortcode', [self::class, 'renderShortcode']);
     }
 }
@@ -329,10 +389,10 @@ MyShortcode::init();
 new MyShortcode();
 ```
 
-Alternatively, you can register your annotation yourself:
+Alternatively, you can register your attribute annotation yourself:
 
 ```php
-use Gebruederheitz\Wordpress\AdminPage\Documentation\Annotations\ShortcodeDocumentation;
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\ShortcodeDocumentation;
 use Gebruederheitz\Wordpress\AdminPage\Documentation\Section\Shortcodes;
 
 /**
@@ -347,20 +407,16 @@ use Gebruederheitz\Wordpress\AdminPage\Documentation\Section\Shortcodes;
  *     }
  *  )
  */
+#[ShortcodeDocumentation(/* ... */)]
 class MyShortcode {
     
-    /* With a dynamic class instance... */
     public function __construct() 
     {
-        add_filter(Shortcodes::HOOK_SHORTCODE_DOCS, [$this, 'onShortcodeDocs']);
+        add_filter(
+            Shortcodes::HOOK_SHORTCODE_DOCS,
+            fn(array $docs) => [...$docs, self::class],
+        );
         add_shortcode('ghwp-my-shortcode', [$this, 'renderShortcode'));
-    }
-    
-    public function onShortcodeDocs(array $docs) 
-    {
-        $docs[] = self::class;
-        
-        return $docs;
     }
 }
 ```
@@ -436,17 +492,16 @@ Same as [with the Shortcodes section](#using-a-different-template-partial-locati
 
 ### v2 to v3
 
-The traits now use the more conventional PascalCase naming, so `withShortcodeDocumentation`
-is now `WithShortcodeDocumentation`.
-We've also removed the deprecated Doctrine\Annotations and replaced them with native
+We've removed the deprecated Doctrine\Annotations and replaced them with native
 PHP attributes. If you were using the ShortcodeDocumentation annotation, you'll
-need to change your code to use the attribute instead:
+need to change your code to use the attribute instead.
+We've also added a new method for registering shortcode documentation that does
+not require importing the trait.
 
 ```php
 - use Gebruederheitz\Wordpress\AdminPage\Documentation\Annotations\ShortcodeDocumentation;
 + use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\ShortcodeDocumentation;
 - use Gebruederheitz\Wordpress\AdminPage\Documentation\Traits\withShortcodeDocumentation;
-+ use Gebruederheitz\Wordpress\AdminPage\Documentation\Traits\WithShortcodeDocumentation;
 
 - /**
 -  * @ShortcodeDocumentation(
@@ -471,6 +526,36 @@ need to change your code to use the attribute instead:
 +   ]
 + )]
 +
+class MyShortcode {
+-    use withShortcodeDocumentation;
+    
+    public function __construct() 
+    {
+-        $this->addDocumentation();
++        ShortcodeDocumentation::register($this);
+        add_shortcode('ghwp-my-shortcode', [$this, 'renderShortcode'));
+    }
+
+```
+
+If you wish to continue using the traits, they now use the more conventional 
+PascalCase naming, so `withShortcodeDocumentation` is now `WithShortcodeDocumentation`:
+
+```php
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\ShortcodeDocumentation;
+- use Gebruederheitz\Wordpress\AdminPage\Documentation\Traits\withShortcodeDocumentation;
++ use Gebruederheitz\Wordpress\AdminPage\Documentation\Traits\WithShortcodeDocumentation;
+
+#[ShortcodeDocumentation(
+  shortcode: "ghwp-my-shortcode",
+  description: "Renders a thing.",
+  parameters: [
+      "id" => "The post ID you wish to display."
+  ],
+  examples: [
+      "[ghwp-my-shortcode id=123 /]"
+  ]
+)]
 class MyShortcode {
 -    use withShortcodeDocumentation;
 +    use WithShortcodeDocumentation;
