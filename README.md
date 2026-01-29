@@ -436,14 +436,17 @@ Same as [with the Shortcodes section](#using-a-different-template-partial-locati
 
 ### v2 to v3
 
-We've removed the deprecated Doctrine\Annotations and replaced them with native
+The traits now use the more conventional PascalCase naming, so `withShortcodeDocumentation`
+is now `WithShortcodeDocumentation`.
+We've also removed the deprecated Doctrine\Annotations and replaced them with native
 PHP attributes. If you were using the ShortcodeDocumentation annotation, you'll
 need to change your code to use the attribute instead:
 
 ```php
 - use Gebruederheitz\Wordpress\AdminPage\Documentation\Annotations\ShortcodeDocumentation;
 + use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\ShortcodeDocumentation;
-use Gebruederheitz\Wordpress\AdminPage\Documentation\Traits\withShortcodeDocumentation;
+- use Gebruederheitz\Wordpress\AdminPage\Documentation\Traits\withShortcodeDocumentation;
++ use Gebruederheitz\Wordpress\AdminPage\Documentation\Traits\WithShortcodeDocumentation;
 
 - /**
 -  * @ShortcodeDocumentation(
@@ -469,7 +472,8 @@ use Gebruederheitz\Wordpress\AdminPage\Documentation\Traits\withShortcodeDocumen
 + )]
 +
 class MyShortcode {
-    use withShortcodeDocumentation;
+-    use withShortcodeDocumentation;
++    use WithShortcodeDocumentation;
     
     public function __construct() 
     {

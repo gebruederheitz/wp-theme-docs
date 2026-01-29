@@ -8,8 +8,6 @@ use Attribute;
 class ShortcodeDocumentation
 {
     /**
-     * @param string $shortcode
-     * @param string $description
      * @param array<string, string> $parameters
      * @param array<string> $examples
      */

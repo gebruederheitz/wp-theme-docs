@@ -22,7 +22,8 @@
         "phpstan/phpstan": "^1.12",
         "szepeviktor/phpstan-wordpress": "^1.3",
         "wecodemore/wpstarter": "~2.0",
-        "johnpbloch/wordpress-core": "6.9.*@stable"
+        "johnpbloch/wordpress-core": "6.9.*@stable",
+        "fastvolt/markdown": "^0.2.5"
     },
     "scripts": {
         "lint": "phpstan analyse -c .phpstan.neon --memory-limit=2G"
@@ -35,5 +36,8 @@
     "extra": {
         "wordpress-content-dir": ".wp/wordpress/wp-content",
         "wordpress-install-dir": ".wp/wordpress"
+    },
+    "suggest": {
+        "fastvolt/markdown": "^0.2.5: For rendering markdown documentation."
     }
 }

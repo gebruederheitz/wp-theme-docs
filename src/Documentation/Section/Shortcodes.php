@@ -56,7 +56,7 @@ class Shortcodes extends AbstractAdminPageSection implements
         }, $annotatedShortcodeClasses);
     }
 
-    public function renderRow(ShortcodeDocumentation $doc)
+    public function renderRow(ShortcodeDocumentation $doc): void
     {
         load_template(
             __DIR__ . '/../../../templates/shortcode-table-row.php',

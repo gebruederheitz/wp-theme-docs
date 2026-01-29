@@ -2,6 +2,7 @@
 
 namespace Gebruederheitz\Wordpress\AdminPage\Helper;
 
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\DocumentationSection;
 use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\ShortcodeDocumentation;
 use ReflectionAttribute;
 use ReflectionClass;
@@ -40,6 +41,25 @@ class AttributeReader
         /** @var array<ReflectionAttribute<ShortcodeDocumentation>> $attributes */
         $attributes = $reflectionClass->getAttributes(
             ShortcodeDocumentation::class,
+        );
+
+        if (!empty($attributes)) {
+            return $attributes[0]->newInstance();
+        }
+
+        return null;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public static function getDocumentationSection(
+        string $className
+    ): DocumentationSection|null {
+        $reflectionClass = new ReflectionClass($className);
+        /** @var array<ReflectionAttribute<DocumentationSection>> $attributes */
+        $attributes = $reflectionClass->getAttributes(
+            DocumentationSection::class,
         );
 
         if (!empty($attributes)) {
