@@ -1,8 +1,8 @@
 <?php
-    /** @var Gebruederheitz\Wordpress\AdminPage\Documentation\Annotations\ShortcodeDocumentation $doc */
+    /** @var Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\ShortcodeDocumentation $doc */
     [$doc] = $args;
 
-    $parameters = $doc->getParameters();
+    $parameters = $doc->parameters;
     $parameterCount = count($parameters);
     $rowspanValue = $parameterCount ?: '1';
     $rowspan = "rowspan=\"$rowspanValue\"";
@@ -10,22 +10,22 @@
 ?>
 <tr>
     <td <?= $rowspan ?>>
-        <pre><code><?= $doc->getShortcode() ?></code></pre>
+        <pre><code><?= $doc->shortcode ?></code></pre>
     </td>
     <?php if ($doc->hasParameters()): ?>
-    <?php foreach ($doc->getParameters() as $parameterName => $parameterDescription): ?>
+    <?php foreach ($parameters as $parameterName => $parameterDescription): ?>
     <?php if ($index > 0): ?></tr><tr><?php endif; ?>
     <td><?= $parameterName ?></td>
     <td><?= $parameterDescription ?></td>
     <?php if ($index === 0): ?>
         <td <?= $rowspan ?>>
             <p>
-                <?= $doc->getDescription() ?>
+                <?= $doc->description ?>
             </p>
         </td>
         <td <?= $rowspan ?>>
             <ul>
-                <?php foreach ($doc->getExamples() as $example): ?>
+                <?php foreach ($doc->examples as $example): ?>
                     <li><pre><code lang="html"><?= $example ?></code></pre></li>
                 <?php endforeach; ?>
             </ul>
@@ -41,12 +41,12 @@
     <?php if (!$parameterCount): ?>
         <td <?= $rowspan ?>>
             <p>
-                <?= $doc->getDescription() ?>
+                <?= $doc->description ?>
             </p>
         </td>
         <td <?= $rowspan ?>>
             <ul>
-                <?php foreach ($doc->getExamples() as $example): ?>
+                <?php foreach ($doc->examples as $example): ?>
                     <li><pre><code lang="html"><?= $example ?></code></pre></li>
                 <?php endforeach; ?>
             </ul>

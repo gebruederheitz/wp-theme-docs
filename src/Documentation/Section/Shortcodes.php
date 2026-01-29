@@ -2,9 +2,9 @@
 
 namespace Gebruederheitz\Wordpress\AdminPage\Documentation\Section;
 
-use Gebruederheitz\Wordpress\AdminPage\Documentation\Annotations\ShortcodeDocumentation;
+use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\ShortcodeDocumentation;
 use Gebruederheitz\Wordpress\AdminPage\AdminPageSectionInterface;
-use Gebruederheitz\Wordpress\AdminPage\Helper\AnnotationReader;
+use Gebruederheitz\Wordpress\AdminPage\Helper\AttributeReader;
 use Gebruederheitz\Wordpress\AdminPage\AbstractAdminPageSection;
 
 use function apply_filters;
@@ -52,7 +52,7 @@ class Shortcodes extends AbstractAdminPageSection implements
         sort($annotatedShortcodeClasses);
 
         return array_map(function ($className) {
-            return AnnotationReader::getDocumentation($className);
+            return AttributeReader::getShortcodeDocumentation($className);
         }, $annotatedShortcodeClasses);
     }
 
