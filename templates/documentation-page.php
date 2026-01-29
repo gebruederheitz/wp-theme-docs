@@ -65,6 +65,3 @@
         <?php $section->render($page); ?>
     </div>
 <?php endforeach; ?>
-
- ?>
- ?>
