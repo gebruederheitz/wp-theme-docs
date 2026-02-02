@@ -44,6 +44,12 @@
         scroll-margin-block-start: 5rem;
     }
 
+    .ghwp-invisible-anchor:active,
+    .ghwp-invisible-anchor:focus-visible,
+    .ghwp-invisible-anchor:focus {
+        outline: none;
+    }
+
     #wpbody-content {
         padding-bottom: 15vh;
     }

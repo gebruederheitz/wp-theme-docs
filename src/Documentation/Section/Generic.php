@@ -39,7 +39,9 @@ class Generic extends AbstractAdminPageSection implements
     public function renderAnchor(): string
     {
         if (!empty($this->docs->anchor)) {
-            return '<a href="#" id="' . $this->docs->anchor . '"></a>';
+            return '<a href="#" class="ghwp-invisible-anchor" id="' .
+                $this->docs->anchor .
+                '"></a>';
         }
         return '';
     }
