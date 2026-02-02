@@ -1,6 +1,6 @@
 {
     "name": "@gebruederheitz/wp-theme-docs-util",
-    "version": "3.0.3",
+    "version": "3.1.0",
     "description": "Utilities for the gebruederheitz/wp-theme-docs PHP composer package",
     "main": "",
     "engines": {
