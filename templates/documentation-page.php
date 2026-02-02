@@ -3,7 +3,6 @@
 /** @var array{0: Gebruederheitz\Wordpress\AdminPage\AdminPage} $args */
 [$page] = $args; ?>
 <style>
-
     html, body {
         scroll-behavior: smooth;
     }
@@ -48,6 +47,7 @@
     #wpbody-content {
         padding-bottom: 15vh;
     }
+    <?= apply_filters('ghwp_filter_documentation_page_styles', '', $page) ?>)
 </style>
 <h1 class="ghwp-docs-title"><?= $page->getTitle() ?></h1>
 
