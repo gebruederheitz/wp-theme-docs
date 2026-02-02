@@ -21,23 +21,17 @@ class AdminPage
     protected const PAGE_TEMPLATE_PATH =
         __DIR__ . '/../templates/documentation-page.php';
 
-    /** @var string */
-    protected $title = 'Extras';
+    protected string $title = 'Extras';
 
-    /** @var string */
-    protected $menuSlug;
+    protected string $menuSlug;
 
-    /** @var string */
-    protected $menuLocation = 'themes.php';
+    protected string $menuLocation = 'themes.php';
 
-    /** @var string */
-    protected $menuTitle;
+    protected string $menuTitle;
 
-    /** @var string */
-    protected $overridePath = '';
+    protected string $overridePath = '';
 
-    /** @var string */
-    protected $i18nNamespace = 'ghwp';
+    protected string $i18nNamespace = 'ghwp';
 
     public static function factory(
         string $menuSlug,
@@ -122,7 +116,7 @@ class AdminPage
         return $this->title;
     }
 
-    public function onAdminMenu()
+    public function onAdminMenu(): void
     {
         $this->registerSubmenu();
     }
@@ -163,12 +157,14 @@ class AdminPage
 
         sort($annotatedClasses);
 
-        return array_map(function ($className) {
-            return AttributeReader::getDocumentationSection($className);
+        $attributesByClass = array_map(function ($className) {
+            return AttributeReader::getDocumentationSections($className);
         }, $annotatedClasses);
+
+        return array_merge(...$attributesByClass);
     }
 
-    protected function registerSubmenu()
+    protected function registerSubmenu(): void
     {
         add_submenu_page(
             $this->menuLocation,

@@ -78,6 +78,7 @@ class MyOtherShortcode
         markdown: true
     )
 ]
+#[DocumentationSection('Second Section for the same module!', 'Let\'s go crazy with these docs!')]
 class MyDocumentedModule
 {
     use WithDocumentationSection;

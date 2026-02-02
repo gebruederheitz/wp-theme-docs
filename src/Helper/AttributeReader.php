@@ -51,11 +51,11 @@ class AttributeReader
     }
 
     /**
+     * @return DocumentationSection[]
      * @throws ReflectionException
      */
-    public static function getDocumentationSection(
-        string $className
-    ): DocumentationSection|null {
+    public static function getDocumentationSections(string $className): array
+    {
         $reflectionClass = new ReflectionClass($className);
         /** @var array<ReflectionAttribute<DocumentationSection>> $attributes */
         $attributes = $reflectionClass->getAttributes(
@@ -63,9 +63,9 @@ class AttributeReader
         );
 
         if (!empty($attributes)) {
-            return $attributes[0]->newInstance();
+            return array_map(fn($s) => $s->newInstance(), $attributes);
         }
 
-        return null;
+        return [];
     }
 }

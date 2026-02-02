@@ -18,7 +18,7 @@ class Shortcodes extends AbstractAdminPageSection implements
      */
     public const HOOK_SHORTCODE_DOCS = 'ghwp_filter_documented_shortcodes';
 
-    protected $title = 'Available Shortcodes';
+    protected string $title = 'Available Shortcodes';
 
     public function __construct(?string $title = null)
     {

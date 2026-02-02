@@ -10,9 +10,9 @@ use function get_theme_file_path;
 class Icons extends AbstractAdminPageSection implements
     AdminPageSectionInterface
 {
-    protected $title = 'Available Icon-Partials';
+    protected string $title = 'Available Icon-Partials';
 
-    protected $iconsPath = '/template-parts/svg/';
+    protected string $iconsPath = '/template-parts/svg/';
 
     public function __construct(?string $title = null)
     {

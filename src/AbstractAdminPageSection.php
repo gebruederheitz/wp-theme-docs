@@ -2,10 +2,6 @@
 
 namespace Gebruederheitz\Wordpress\AdminPage;
 
-use Gebruederheitz\Wordpress\AdminPage\AdminPage;
-use Gebruederheitz\Wordpress\AdminPage\Documentation\DocumentationMenu;
-use Gebruederheitz\Wordpress\AdminPage\AdminPageSectionInterface;
-
 use function load_template;
 use function locate_template;
 
@@ -19,7 +15,7 @@ abstract class AbstractAdminPageSection implements AdminPageSectionInterface
         return '';
     }
 
-    public function render(AdminPage $page)
+    public function render(AdminPage $page): void
     {
         load_template($this->getPartial(), false, [$page, $this]);
     }

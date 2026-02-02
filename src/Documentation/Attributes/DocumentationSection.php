@@ -5,7 +5,7 @@ namespace Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes;
 use Attribute;
 use Gebruederheitz\Wordpress\AdminPage\AdminPage;
 
-#[Attribute(Attribute::TARGET_CLASS)]
+#[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 class DocumentationSection
 {
     public function __construct(
