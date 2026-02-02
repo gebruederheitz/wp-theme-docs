@@ -39,7 +39,7 @@ class AdminPage
         ?string $menuLocation = 'themes.php',
         ?string $menuTitle = null,
         ?string $overridePath = null,
-        ?string $i18nNamespace = 'ghwp'
+        ?string $i18nNamespace = 'ghwp',
     ): AdminPage {
         return new AdminPage(
             $menuSlug,
@@ -57,7 +57,7 @@ class AdminPage
         ?string $menuLocation = 'themes.php',
         ?string $menuTitle = null,
         ?string $overridePath = null,
-        ?string $i18nNamespace = 'ghwp'
+        ?string $i18nNamespace = 'ghwp',
     ) {
         $this->menuSlug = $menuSlug;
         $this->overridePath = $overridePath ?: static::DEFAULT_OVERRIDE_PATH;
@@ -136,11 +136,10 @@ class AdminPage
     {
         $sectionAttributes = $this->getGenericSections();
         $sections = array_map(function (
-            DocumentationSection $sectionAttribute
+            DocumentationSection $sectionAttribute,
         ) {
             return new Generic($sectionAttribute);
-        },
-        $sectionAttributes);
+        }, $sectionAttributes);
 
         $this->addSections($sections);
 

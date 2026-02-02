@@ -12,9 +12,8 @@ class DocumentationSection
         public string $title,
         public string $description,
         public ?string $anchor = null,
-        public bool $markdown = false
-    ) {
-    }
+        public bool $markdown = false,
+    ) {}
 
     /**
      * @param object|class-string $identifier

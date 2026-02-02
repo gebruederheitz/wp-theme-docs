@@ -9,9 +9,7 @@ use Gebruederheitz\Wordpress\AdminPage\Documentation\Attributes\DocumentationSec
 class Generic extends AbstractAdminPageSection implements
     AdminPageSectionInterface
 {
-    public function __construct(private DocumentationSection $docs)
-    {
-    }
+    public function __construct(private DocumentationSection $docs) {}
 
     public function getTitle(): string
     {

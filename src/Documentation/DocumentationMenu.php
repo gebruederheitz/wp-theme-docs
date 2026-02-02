@@ -18,7 +18,7 @@ class DocumentationMenu extends AdminPage
         ?array $sections = [],
         ?string $title = null,
         ?string $overridePath = null,
-        ?bool $processGenericSections = false
+        ?bool $processGenericSections = false,
     ) {
         parent::__construct(
             static::MENU_SLUG,

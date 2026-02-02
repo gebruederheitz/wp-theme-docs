@@ -16,9 +16,8 @@ class ShortcodeDocumentation
         public string $shortcode,
         public string $description,
         public array $parameters = [],
-        public array $examples = []
-    ) {
-    }
+        public array $examples = [],
+    ) {}
 
     /**
      * @param object|class-string $identifier

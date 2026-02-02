@@ -35,7 +35,7 @@ class AttributeReader
      * @throws ReflectionException
      */
     public static function getShortcodeDocumentation(
-        string $className
+        string $className,
     ): ShortcodeDocumentation|null {
         $reflectionClass = new ReflectionClass($className);
         /** @var array<ReflectionAttribute<ShortcodeDocumentation>> $attributes */
