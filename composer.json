@@ -19,8 +19,8 @@
         "gebruederheitz/simple-singleton": "^1.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.12",
-        "szepeviktor/phpstan-wordpress": "^1.3",
+        "phpstan/phpstan": "^2.1.38",
+        "szepeviktor/phpstan-wordpress": "^v2.0.3",
         "wecodemore/wpstarter": "~2.0",
         "johnpbloch/wordpress-core": "6.9.*@stable",
         "fastvolt/markdown": "^0.2.5"

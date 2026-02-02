@@ -19,7 +19,7 @@ tasks:
     desc: Make prettier process and fix all files in src/
     dir: util
     deps: [install]
-    cmd: npx prettier -w --config .prettierrc ../src
+    cmd: npx prettier -w ../src
 
   release:
     desc: Create a tagged release to publish a new version of the package

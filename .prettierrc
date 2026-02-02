@@ -2,6 +2,7 @@
     "singleQuote": true,
     "tabWidth": 4,
     "useTabs": false,
-    "phpVersion": "7.4",
+    "phpVersion": "8.0",
+    "plugins": ["@prettier/plugin-php"],
     "trailingCommaPHP": true
 }
